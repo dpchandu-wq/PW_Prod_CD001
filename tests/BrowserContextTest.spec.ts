@@ -18,16 +18,14 @@ import { test, expect } from '@playwright/test';
 // });
 
 
-test('Browser context options', async ({ browser }) => {
+test('Browser context options', async ({ browser, browserName }) => {
 
 
     const context = await browser.newContext({
         // Browser Permissions
-        permissions: [
-            'notifications',
-            'geolocation',
-            'microphone'
-        ],
+        permissions: browserName === 'firefox'
+            ? ['notifications', 'geolocation']
+            : ['notifications', 'geolocation', 'microphone'],
         // Time Zone
         timezoneId: 'Asia/Kolkata',
 
