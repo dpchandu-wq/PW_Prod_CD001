@@ -18,16 +18,14 @@ import { test, expect } from '@playwright/test';
 // });
 
 
-test('Browser context options', async ({ browser }) => {
+test('Browser context options', async ({ browser, browserName }) => {
 
 
     const context = await browser.newContext({
         // Browser Permissions
-        permissions: [
-            'notifications',
-            'geolocation',
-            'microphone'
-        ],
+        permissions: browserName === 'firefox' //new line added to check if the browser is firefox or not, if it is firefox then only allow notifications and geolocation permissions otherwise allow microphone permission as well
+            ? ['notifications', 'geolocation']
+            : ['notifications', 'geolocation', 'microphone'],
         // Time Zone
         timezoneId: 'Asia/Kolkata',
 
