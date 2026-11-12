@@ -48,7 +48,6 @@ test('Browser context options', async ({ browser, browserName }) => {
     //await page.goto('https://www.google.com/');
 
     await page.goto('https://expired.badssl.com/');
-
-    await page.waitForTimeout(5000);
+    await expect(page).toHaveURL('https://expired.badssl.com/');
     await context.close();
 });
